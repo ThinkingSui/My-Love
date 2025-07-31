@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <title>❤️ 给我最爱的姜子琦 ❤️</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(120deg, #f9c5d1, #fbc2eb);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Segoe UI', sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .heart {
+            width: 100px;
+            height: 90px;
+            position: relative;
+            margin: 0 auto;
+            animation: beat 1s infinite;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: "";
+            position: absolute;
+            width: 100px;
+            height: 90px;
+            background: red;
+            border-radius: 50%;
+        }
+
+        .heart::before {
+            left: -50px;
+        }
+
+        .heart::after {
+            left: 50px;
+        }
+
+        @keyframes beat {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .typing {
+            margin-top: 40px;
+            font-size: 22px;
+            color: white;
+            text-shadow: 0 0 5px #000;
+            display: inline-block;
+            border-right: 2px solid white;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="heart"></div>
+        <div class="typing" id="text"></div>
+    </div>
+
+    <!-- 背景音乐 -->
+    <audio autoplay loop>
+        <source src="your-music.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- 语音告白 -->
+    <audio id="voice">
+        <source src="iloveyou.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const text = `子琦，谢谢你在我最不完美的时候依然选择我、相信我、包容我。你的温柔与坚定，是我此生最珍贵的幸运。我愿用尽余生的温柔，回应你每一次回头的目光。此心已定，与你走进婚姻的殿堂，不是冲动，而是深思熟虑后的笃定。我爱你，至深、至久、至唯一。`;
+        const typingElement = document.getElementById("text");
+        const voice = document.getElementById("voice");
+
+        let index = 0;
+
+        function typeCharacter() {
+            if (index === 0) {
+                voice.play(); // 在第一字符出现时播放语音
+            }
+            if (index < text.length) {
+                typingElement.innerHTML += text.charAt(index);
+                index++;
+                setTimeout(typeCharacter, 80); // 打字速度（越小越快）
+            } else {
+                typingElement.style.borderRight = "none"; // 移除打字光标
+            }
+        }
+
+        // 启动打字
+        window.onload = typeCharacter;
+    </script>
+</body>
+
+</html>
